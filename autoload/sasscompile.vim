@@ -64,24 +64,6 @@ function! sasscompile#SassCompile()
         endif
     endif
 
-    if cmd != ''
-        if g:sass_compile_beforecmd != ''
-            call system(g:sass_compile_beforecmd)
-        endif
-        if g:sass_compile_aftercmd != ''
-            let cmd = "sasscompileresult=$(".cmd."|sed s/'\[[0-9]*m'/''/g|tr '\\n' '__'|tr ' ' '_')\n ".g:sass_compile_aftercmd
-        endif
-
-        " let cmd = '('.cmd.')&'
-
-        redir @a
-            call system(cmd)
-        redir END
-
-        cgetexpr @a
-        copen
-    endif
-
     exec 'silent cd '.fdir
 endfunction
 
